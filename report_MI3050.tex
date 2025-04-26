@@ -1,0 +1,334 @@
+\documentclass[oneside, a4paper]{book}
+\usepackage[left=3.5cm,right=2cm,top=3.5cm,bottom=3cm]{geometry}
+\usepackage{indentfirst}
+\usepackage{hyperref}
+\usepackage{microtype}
+\usepackage{cite}
+\usepackage{pdfpages} % Gói chèn file PDF
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{tikz, pgf}
+\usetikzlibrary{shapes}
+\usetikzlibrary{patterns}
+\usetikzlibrary{arrows.meta, calc}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{multirow}
+\usepackage{xcolor}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{backcolour},   
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{magenta},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\ttfamily\normalsize,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2
+}
+\lstset{style=mystyle}
+\usepackage{amsmath,amssymb,latexsym,amscd,amsxtra,graphicx,graphpap,amsthm}
+\usepackage{mathtools}
+\usepackage{pb-diagram}
+\usepackage{indentfirst}
+\usepackage{caption}
+\usepackage{aligned-overset}
+\usepackage{picinpar,floatflt}
+\usepackage{longtable}
+\usepackage{fancybox}
+\usepackage[utf8]{vietnam}
+\usepackage[tight,vietnam]{minitoc}
+\usepackage{anyfontsize}
+\usepackage{tabularx}
+\usepackage{comment} % Sử dụng gói lệnh comment
+%\usepackage{commath}
+%==================================
+\usepackage{titletoc}
+\titlecontents{chapter}
+  [0pt]
+  {\bfseries}
+  {\chaptername\ \thecontentslabel\enskip}
+  {}
+  {\hfill\contentspage}
+
+%==================================
+
+%==================================
+\renewcommand{\thechapter}{\arabic{chapter}}
+\renewcommand{\thesection}{\arabic{chapter}.\arabic{section}}
+\newcommand{\eproof}{\hfill $\square$}
+\newcommand{\chm}{{\bfseries Chứng minh.}}
+\newenvironment{cm}{\chm}{\eproof}
+%===============================
+
+\theoremstyle{plain}
+\newtheorem{bd}{Bổ đề}[chapter]
+\providecommand*{\bdautorefname}{Bổ đề}
+\newtheorem{md}{Mệnh đề}[chapter]
+\providecommand*{\mdautorefname}{Mệnh đề}
+\newtheorem{hq}{Hệ quả}[chapter]
+\providecommand*{\hqautorefname}{Hệ quả}
+\newtheorem{dl}{\bfseries Định lý}[chapter]
+\providecommand*{\dlautorefname}{Định lý}
+\newtheorem{tc}{\bfseries Tính chất}[chapter]
+\providecommand*{\tcautorefname}{Tính chất}
+
+\theoremstyle{definition}
+\newtheorem{cau}{Câu}[]
+\providecommand*{\cauautorefname}{Câu}
+
+\newtheorem*{namedthm}{\namedthmname}
+\newcounter{namedthm}
+\makeatletter
+\newenvironment{named}[1]
+  {\def\namedthmname{#1}%
+   \refstepcounter{namedthm}%
+   \namedthm\def\@currentlabel{#1}}
+  {\endnamedthm}
+\makeatother
+
+\theoremstyle{definition}
+\newtheorem{dn}{Định nghĩa}[chapter]
+\providecommand*{\dnautorefname}{Định nghĩa}
+\newtheorem{bt}{Bài toán}[chapter]
+\providecommand*{\btautorefname}{Bài toán}
+\newtheorem{vd}{\bfseries Ví dụ}[chapter]
+\providecommand*{\vdautorefname}{Ví dụ}
+\newtheorem{algorithm}{\bfseries Thuật toán}[chapter]
+\providecommand*{\algorithmautorefname}{Thuật toán}
+\newtheorem{assumption}{\bfseries Giả thiết}[chapter]
+\providecommand*{\assumptionautorefname}{Giả thiết}
+
+\theoremstyle{remark}
+\newtheorem{kh}{ký hiệu}[chapter]
+\newtheorem{nx}{Nhận xét}[chapter]
+\newtheorem{ly}{Lưu ý}[chapter]
+
+\renewcommand{\thekh}{\textit{\thechapter.\arabic{kh}}}
+\renewcommand{\thenx}{\textit{\thechapter.\arabic{nx}}}
+\renewcommand{\thely}{\textit{\thechapter.\arabic{ly}}}
+
+\renewcommand{\baselinestretch}{1.5}
+\setlength{\oddsidemargin}{0.3cm}     %Lề trái tính từ điểm cách mép giấy 2.54cm
+\setlength{\topmargin}{-1cm}          %Lề trên tính từ điểm cách mép giấy 2.54cm
+\setlength{\headsep}{0.5cm}                %Khoang cach tu  Headerline tới Khối chữ
+\textwidth=15.5cm
+\textheight=24.5cm
+\renewcommand{\bibname}{Tài liệu tham khảo}
+\renewcommand{\large}{\fontsize{14pt}{14pt}\selectfont}
+\renewcommand{\Large}{\fontsize{16pt}{16pt}\selectfont}
+\renewcommand{\LARGE}{\fontsize{15pt}{15pt}\selectfont}
+\renewcommand{\th}{\fontsize{18pt}{18pt}\selectfont}
+\makeatletter
+\def\ps@myheadings{
+\def\@evenhead{\hfil\thepage\hfil}
+\def\@oddhead{
+\hfil\thepage\hfil}}
+\makeatother
+\pagestyle{myheadings}
+
+\usepackage{fancyhdr}
+
+\fancyhf{}
+
+\fancyhead[C]{\thepage}
+
+\pagestyle{fancy}
+
+\fancypagestyle{plain}
+
+\fancyhf{} % clear all header and footer fields
+
+\fancyhead[C]{\thepage}
+
+\renewcommand{\headrulewidth}{0pt}
+\newenvironment{mproof}{\paragraph{Chứng minh:}}{\hfill$\square$}
+\newenvironment{myproof}[2] {\paragraph{Proof of {#1} {#2} :}}{\hfill$\square$}
+\DeclarePairedDelimiter{\pro}{\langle}{\rangle}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\usepackage{xpatch}
+\makeatletter
+\AtBeginDocument{\xpatchcmd{\@thm}{\thm@headpunct{.}}{\thm@headpunct{}}{}{}}
+\makeatother
+
+\begin{document}
+	
+\thispagestyle{empty}
+%\thispagestyle{headings}
+\setcounter{page}{1}%
+\pagenumbering{roman}
+%\addcontentsline{toc}{chapter}{{Trang bìa phụ}}
+%\newgeometry{top=2.0cm,bottom=3.0cm,left=3.5cm,right=2.8cm}
+%\begin{titlepage}
+
+%\setlength{\fboxrule}{1pt}
+%\thisfancypage{\setlength{\fboxsep}{2pt}\setlength{\fboxrule}{2pt}\doublebox}{} 
+%\setlength{\fboxrule}{1pt}
+%\thisfancypage{\setlength{\fboxsep}{0pt}\setlength{\shadowsize}{0pt}\doublebox}{}
+\pagenumbering{gobble}
+\newgeometry{left=2.8cm,right=1.8cm,top=2.5cm,bottom=2cm}
+
+% CoverPage %
+
+\include{Source/coverPage}
+
+% %
+\newpage
+
+% Observe %
+
+%\include{Source/observe}
+
+% %
+\newpage
+
+% Thanks %
+
+\include{Source/thanks}
+
+% %
+\newpage
+
+% abbreviate %
+
+\include{Source/abbreviate}
+
+% %
+
+\tableofcontents % Là xuất hiện mục lục.
+\pagestyle{myheadings}
+
+\newpage
+
+%\addcontentsline{toc}{chapter}{Danh sách bảng}
+\thispagestyle{empty}
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+% tableOfSAA %
+\include{Source/tableOfSAA}
+
+% Danh sách bảng %
+\newpage
+\listoftables
+%\addcontentsline{toc}{chapter}{\bfseries Danh sách bảng}
+\thispagestyle{empty}
+%
+
+% Danh sách hình ảnh %
+\newpage
+\renewcommand{\listfigurename}{Danh sách hình ảnh}
+\listoffigures
+%\addcontentsline{toc}{chapter}{\bfseries Danh sách hình ảnh}
+ %
+
+
+%\chapter*{Mở đầu}
+%\addcontentsline{toc}{chapter}{\bfseries Mở đầu}
+%\large
+\setlist{nosep}
+
+\clearpage
+
+\chapter*{Mở đầu}
+\addcontentsline{toc}{chapter}{Mở đầu}
+Bài toán vận tải là một mô hình quan trọng trong lĩnh vực \textbf{quy hoạch tuyến tính}, có ứng dụng rộng rãi trong \textbf{quản lý logistics}, \textbf{tối ưu hóa chuỗi cung ứng}, \textbf{phân phối tài nguyên} và nhiều lĩnh vực khác. Mục tiêu của bài toán là tìm phương án vận chuyển tối ưu từ các nguồn đến các điểm tiêu thụ sao cho tổng chi phí là nhỏ nhất và thỏa mãn các ràng buộc cung – cầu.
+
+Báo cáo này tập trung:
+\begin{itemize}
+    \item Tổng quan lý thuyết nền tảng và mô hình bài toán.
+    \item Phân tích các phương pháp giải cơ bản và mở rộng.
+    \item Trình bày chi tiết các kỹ thuật khởi tạo phương án xuất phát hiệu quả.
+\end{itemize}
+
+\include{Index/chapter1}
+\clearpage
+
+\include{Index/chapter2}
+\clearpage
+
+\include{Index/chapter3}
+\clearpage
+
+\chapter{Kết luận}
+Bài toán vận tải là mô hình tối ưu hóa cơ bản và hiệu quả trong logistics. Báo cáo đã trình bày tổng quan, phương pháp giải, và khởi tạo bài toán. Các hướng mở bao gồm bài toán động, bất định, hoặc dùng thuật toán di truyền.
+
+%\chapter*{Kết luận}                         % Chương 3
+%\addcontentsline{toc}{chapter}{Kết luận}
+%\setcounter{section}{0}
+%\renewcommand*{\thesection}{\the\value{section}}
+
+
+%\section*{Kết quả đạt được} 
+
+%\begin{itemize}
+%    \item ...
+%\end{itemize}
+%
+%\vspace{5mm}
+%\section*{Kỹ năng đạt được}
+%\begin{itemize}
+%    \item Nghiên cứu khoa học, viết bài báo nghiên cứu và đăng trên tạp chí khoa học.
+%    \item Tìm kiếm tài liệu chuyên ngành và tổng hợp các kiến thức tìm hiểu để áp dụng vào nội dung đồ án.
+%    \item Trình bày đồ án một cách logic, chặt chẽ theo chuẩn khoa học, chế bản đồ án bằng \LaTeX.
+%    \item Xây dựng các ví dụ minh họa phù hợp và thiết kế các chương trình thực thi thuật toán bằng Python. 
+%    \item Áp dụng phương pháp đề xuất để giải quyết một số bài toán trong kinh tế và kỹ thuật.
+%\end{itemize}
+%
+%
+%\section*{Hướng phát triển của đồ án trong tương lai}
+%
+%\begin{itemize}
+%    \item ...
+%\end{itemize}
+
+\begin{thebibliography}{99}\rm
+\addcontentsline{toc}{chapter}{\bfseries Tài liệu tham khảo}
+
+\section*{Tiếng Việt}
+
+\bibitem{Kim} Nguyễn Thị Bạch Kim, \textit{Các phương pháp tối ưu – Lý thuyết và thuật toán}, , NXB Đại học Quốc gia TP.HCM, 2020.
+
+\section*{Tiếng Anh}
+
+\bibitem{abc} 
+\end{thebibliography}
+
+% Lưu số thứ tự cuối cùng của tài liệu tham khảo
+\newcounter{lastbibitem}
+\setcounter{lastbibitem}{\value{enumiv}}
+
+
+
+
+
+%\renewcommand{\bibname}{Công trình nghiên cứu liên quan}
+%\begin{thebibliography}{99}\rm
+%\addcontentsline{toc}{chapter}{\bfseries Công trình nghiên cứu liên quan}
+%% Bắt đầu tiếp nối số thứ tự
+%\setcounter{enumiv}{\value{lastbibitem}}
+%
+%\section*{Tiếng Anh}
+%\bibitem{abc} ...
+%\end{thebibliography}
+%
+%\textit{Tóm tắt nội dung nghiên cứu}: ...
+
+
+%\includepdf[pages=-, scale=0.95, pagecommand={\thispagestyle{fancy}}]{paper.pdf} % Chèn toàn bộ file pdf
+
+\end{document}

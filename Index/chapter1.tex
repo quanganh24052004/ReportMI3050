@@ -1,0 +1,16 @@
+\chapter{Tổng quan và cơ sở lý thuyết}
+\section{Giới thiệu \& Mô hình toán học}
+Bài toán vận tải (Transportation Problem) là dạng đặc biệt của quy hoạch tuyến tính, mô tả việc phân phối hàng hóa từ $m$ nguồn cung ($A_i$) đến $n$ điểm cầu ($B_j$). Ở dạng chuẩn, biến quyết định $x_{ij}$ là lượng hàng từ $A_i$ đến $B_j$, với hàm mục tiêu:
+\[
+\min \sum_{i=1}^m \sum_{j=1}^n c_{ij} x_{ij}
+\]
+và các ràng buộc:
+\[
+\sum_j x_{ij} = a_i,\quad \sum_i x_{ij} = b_j,\quad x_{ij} \geq 0
+\]
+
+\section{Điều kiện tồn tại nghiệm}
+Để bài toán có nghiệm khả thi và tối ưu, thường yêu cầu \textbf{cân bằng thu-phát}: $\sum_i a_i = \sum_j b_j$. Nếu không cân bằng, có thể bổ sung điểm phát hoặc nhận giả để cân bằng. Khi cân bằng, luôn tồn tại phương án cơ bản tối ưu.
+
+\section{Bảng vận tải và chu trình}
+Bài toán được biểu diễn dưới dạng bảng chi phí $m \times n$. Mỗi phương án cơ bản không suy biến ứng với $m+n-1$ ô chọn (không chứa chu trình). \textbf{Chu trình} là dãy các ô trong bảng nối tiếp theo hàng/cột sao cho ô đầu và ô cuối liền kề. Chu trình được sử dụng để điều chỉnh lưu lượng và kiểm tra cải tiến nghiệm.

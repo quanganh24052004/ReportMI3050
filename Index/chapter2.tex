@@ -1,0 +1,13 @@
+\chapter{Phương pháp giải bài toán vận tải}
+\section{Phương pháp thế vị}
+Đây là thuật toán tối ưu hóa dựa trên ý tưởng kiểm tra từng ô không thuộc cơ sở bằng cách xây dựng chu trình khép kín, tính hệ số cải tiến $\Delta_{ij}$ để xem liệu giảm chi phí tổng có thể thực hiện được hay không. Phương pháp thế vị tương đương với bài toán lõi kép của quy hoạch tuyến tính.
+
+\section{Các bài toán mở rộng}
+\begin{itemize}
+    \item \textbf{Vận tải không cân bằng}: Tổng cung $\neq$ tổng cầu. Thêm điểm giả để cân bằng.
+    \item \textbf{Lập kho trung chuyển}: Cho phép hàng đi qua các điểm trung gian.
+    \item \textbf{Ô cấm}: Một số ô không cho phép vận chuyển.
+    \item \textbf{Ràng buộc bất đẳng thức}: Biến ràng buộc cung/cầu thành bất đẳng thức.
+    \item \textbf{Bài toán phân công (Hungary)}: Trường hợp $a_i = b_j = 1$, giải bằng phương pháp Hungary.
+    \item \textbf{Bài toán chuyển hàng}: Cho phép chuyển qua trạm trung gian, giải qua quy hoạch tuyến tính.
+\end{itemize}
