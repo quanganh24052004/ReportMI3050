@@ -14,3 +14,106 @@ và các ràng buộc:
 
 \section{Bảng vận tải và chu trình}
 Bài toán được biểu diễn dưới dạng bảng chi phí $m \times n$. Mỗi phương án cơ bản không suy biến ứng với $m+n-1$ ô chọn (không chứa chu trình). \textbf{Chu trình} là dãy các ô trong bảng nối tiếp theo hàng/cột sao cho ô đầu và ô cuối liền kề. Chu trình được sử dụng để điều chỉnh lưu lượng và kiểm tra cải tiến nghiệm.
+
+\section*{1. Lý thuyết}
+
+\textbf{Chu trình:} là một dãy ô khép kín trong bảng vận tải, trong đó các ô liền nhau thuộc cùng một hàng hoặc cùng một cột. Chu trình có số ô chẵn, tối thiểu là 4 ô. Chu trình được dùng để điều chỉnh phương án phân bổ sao cho vẫn đảm bảo cân bằng cung cầu.
+
+\textbf{Tại sao cần chu trình?} Khi xét chèn một ô mới vào cơ sở (ô rỗng), một chu trình sẽ xuất hiện. Việc điều chỉnh luồng hàng hóa theo chu trình giúp kiểm tra liệu phương án hiện tại có tối ưu không.
+
+\textbf{Tính hệ số cải tiến $\Delta_{ij}$:} Đánh dấu xen kẽ $+$ và $-$ trên chu trình (ô bắt đầu được đánh $+$), sau đó áp dụng công thức:
+\[
+\Delta_{ij} = \sum_{\text{ô dấu }+} c_{pq} - \sum_{\text{ô dấu }-} c_{pq}
+\]
+Nếu $\Delta_{ij} < 0$ thì phương án chưa tối ưu và có thể cải thiện chi phí bằng cách điều chỉnh theo chu trình.
+
+\section*{2. Ví dụ minh họa}
+
+\subsection*{Bảng chi phí và phương án ban đầu}
+
+\begin{center}
+\begin{tabular}{c|ccc|c}
+     & B1 & B2 & B3 & Cung \\ \hline
+A1 & 8 (15) & 6 (5)  & 10 (0) & 20 \\
+A2 & 9 (0)  & 12 (30) & 13 (0) & 30 \\
+A3 & 14 (0) & 9 (0)  & 16 (25) & 25 \\ \hline
+Cầu & 15 & 35 & 25 & 75 \\
+\end{tabular}
+\end{center}
+
+Các ô có phân bổ: (1,1), (1,2), (2,2), (3,3).
+
+\subsection*{Xác định chu trình qua ô rỗng (2,1)}
+Chu trình: (2,1) $+$ → (2,2) $-$ → (1,2) $+$ → (1,1) $-$ → quay lại (2,1).
+
+\subsection*{Tính hệ số $\Delta_{2,1}$}
+\[
+\Delta_{2,1} = c_{2,1} + c_{1,2} - (c_{2,2} + c_{1,1}) = 9 + 6 - (12 + 8) = -5
+\]
+
+\textbf{Kết luận:} Vì $\Delta_{2,1} < 0$, phương án hiện tại chưa tối ưu. Có thể cải thiện chi phí nếu thêm phân bổ vào ô (2,1) theo chu trình đã xác định.
+
+Ta biểu diễn các số liệu của bài toán vận tải bằng bảng vận tải dưới đây:
+
+\vspace{1em}
+
+\noindent Trong đó: 
+\begin{itemize}
+    \item $a_i$ là trữ lượng tương ứng tại điểm phát.
+    \item $b_j$ là nhu cầu tương ứng tại điểm thu.
+    \item $c_{ij}$ là chi phí vận chuyển từ điểm phát $i$ tới điểm nhận $j$.
+\end{itemize}
+
+Ma trận các $c_{ij}$ được gọi là phần chính, kí hiệu là $T$. Tập hợp các ô trong phần chính có $x_{ij} > 0$ được gọi là tập các ô chọn của bảng vận tải. Các ô còn lại có $x_{ij} = 0$ được gọi là ô loại.
+
+\section*{Tính chất 1}
+
+Các ô $(i,j) \in T$ của bảng vận tải và các vector cột của ma trận $A$ có sự tương ứng 1-1. Do đó: 
+\begin{itemize}
+    \item Phương án cực biên suy biến sẽ có ít hơn $m+n -1$ ô chọn.
+    \item Phương án cực biên không suy biến sẽ có đúng $m+n- 1$ ô chọn.
+\end{itemize}
+
+\section*{Chu trình}
+
+Một tập được sắp thứ tự gồm các ô của bảng vận tải dạng: $(1,1); (1,2); (2,2) \ldots$ được gọi là \textbf{chu trình} nếu nó thỏa mãn đồng thời ba tính chất sau: 
+\begin{enumerate}
+    \item Hai ô cạnh nhau nằm trong cùng một hàng hoặc một cột.
+    \item Không có ba ô nằm trên cùng một hàng hay một cột.
+    \item Ô đầu tiên nằm ở cùng hàng hoặc cột với ô cuối cùng (chúng cũng được coi là hai ô cạnh nhau).
+\end{enumerate}
+
+\noindent Ví dụ về chu trình:
+
+\vspace{1em}
+
+Giả sử $G \subset T$ là tập các ô nào đó của bảng vận tải. G được gọi là \textbf{chứa chu trình} nếu ta có thể xây dựng được ít nhất một chu trình gồm các ô thuộc $G$. Trái lại, ta nói $G$ không chứa chu trình.
+
+\section*{Tính chất 2}
+
+Xét $G$ là một tập các ô nào đó trong bảng vận tải. Nếu mỗi hàng và mỗi cột của bảng vận tải hoặc không chứa ô nào của $G$ hoặc có ít nhất là hai ô của $G$, thì $G$ là một chu trình.
+
+\section*{Định lý 1}
+
+Xét tập các ô $G \subset T$. Khi đó, hệ vector $\{A_{ij} \mid (i,j) \in G\}$ là độc lập tuyến tính khi và chỉ khi $G$ không chứa chu trình.
+
+\section*{Tính chất 3 (hệ quả định lý 1)}
+
+Xét tập các ô $G \subset T$. Khi đó:
+\begin{itemize}
+    \item Phương án $x = (x_{ij})$ là phương án cực biên khi và chỉ khi $G$ không chứa chu trình.
+    \item Nếu $|G| \geq m+n$ thì $G$ chứa chu trình.
+    \item Nếu $|G| = m+n -1$, $G$ không chứa chu trình và $(i, j)$ là một ô của bảng, $(i, j) \notin G$, thì $G \cup \{(i,j)\}$ chứa duy nhất một chu trình.
+\end{itemize}
+
+\section*{Ví dụ minh hoạ}
+
+\[
+\begin{array}{cccc}
+ & 10 & 25 & 15 \\
+20 & 6 & 3 & 5 \\
+30 & 4 & 7 & 6 \\
+\end{array}
+\]
+
+Trong ví dụ trên, ta có thể dễ dàng thấy được một ví dụ về chu trình như đã định nghĩa ở trên.

@@ -1,0 +1,58 @@
+\chapter{Tổng quan và cơ sở lý thuyết}
+    \section{Giới thiệu \& Mô hình toán học}
+
+        \subsection{Mô hình toán học}
+            Bài toán vận tải là tìm phương án vận chuyển cho một loại hàng hóa từ $m$ điểm phát với trữ lượng tương ứng là $a_1, a_2, \dots , a_m$ tới $n$ điểm thu với nhu cầu tại các điểm lần lượt là $b_1, b_2, \dots, b_n$. Hàng có thể chuyển từ mỗi điểm phát đến các điểm thu tùy ý và một điểm thu có thể nhận hàng tại các điểm phát bất kỳ. Mỗi điểm thu có thể không nhận hàng ở một điểm phát nào đó nhưng đã nhận rồi thì không được trả lại.
+
+            Ký hiệu $x_{ij}$ (tương ứng $c_{i}$) là lượng hàng vận chuyển (tương ứng cước phí vận chuyển một đơn vị hàng) từ điểm phát $i$ đến điểm thu $j$, $i = 1, \dots, m, j=1, \dots, n$. Bài toán vận tải được phát biểu là
+            $$
+            \min f(x) = \sum_{i=1}^m \sum_{j=1}^n c_{ij} x_{ij},
+            $$
+
+            $$
+            \begin{aligned}
+                \text{v.đ.k. }  &\sum_{j=1}^n x_{ij} = a_i, \quad i= 1, \dots,          m,\\
+                                &\sum_{i=1}^n x_{ij} = b_j, \quad j= 1, \dots, n,\\    
+                                &x_{ij} \geq 0, \quad \dots, i= 1, \dots, m,  j= 1, \dots, n.       
+            \end{aligned}
+            $$
+            Như đã biết, điều kiện (4.1) có nghĩa là các điểm phát phải phát hết hàng và điều khiện (4.2) có nghĩa là các điểm thu nhận đủ lượng hàng cho mong muốn.
+
+            Vecto $x = (x_{11}, x_{12}, \dots, x_{1n}, x_{2n}, \dots, x_{m1}, \dots, x_{mn})^T$ thỏa mã các ràng buộc (4.1)-(4.3) được gọi là \textit{một phương án} chấp nhận được của bài toán vận tải. Để đơn giản, ta thường viết là $x = (x_{ij})$. Các biểu diễn phương án $x$ dưới dạng ma trận phân phối hàng hóa và cước phí $c_{ij}, i=1, \dots, m, j= 1, \dots, n$, dưới dạng ma trận chi phí $C$,
+            $$
+            x= 
+            \begin{pmatrix}
+                x_{11} &x_{12}  &\dots  &x_{1n}  \\
+                \vdots &\vdots  & \ddots  &\vdots  \\
+                x_{n1} &x_{n2}  &\dots  & x_{nm} \\
+            \end{pmatrix}
+            , \quad C = 
+            \begin{pmatrix}
+                c_{11} &c_{12}  &\dots  &c_{1n}  \\
+                \vdots &\vdots  & \ddots  &\vdots  \\
+                c_{n1} &c_{n2}  &\dots  & c_{nm} \\
+            \end{pmatrix}.
+            $$
+            cũng thường đưụoc sử dụng. Ta định nghĩa ma trận $A$cấp $(m+n) \times (m \times n)$ và vecto $b \in \mathbb{R}^{m+n}$ như sau:
+            $$
+            \begin{pmatrix}
+            1 & 1 & \cdots & 1 & 0 & 0 & \cdots & 0 \\
+            0 & 0 & \cdots & 0 & 1 & 1 & \cdots & 1 \\
+            \vdots & \vdots & \ddots & \vdots & \vdots & \vdots & \ddots & \vdots \\
+            0 & 0 & \cdots & 0 & 0 & 0 & \cdots & 1 \\
+            1 & 0 & \cdots & 0 & 1 & 0 & \cdots & 0 \\
+            0 & 1 & \cdots & 0 & 0 & 1 & \cdots & 0 \\
+            \vdots & \vdots & \ddots & \vdots & \vdots & \vdots & \ddots & \vdots \\
+            0 & 0 & \cdots & 1 & 0 & 0 & \cdots & 1 \\
+            \end{pmatrix}
+            $$
+và các ràng buộc:
+\[
+\sum_j x_{ij} = a_i,\quad \sum_i x_{ij} = b_j,\quad x_{ij} \geq 0
+\]
+
+\section{Điều kiện tồn tại nghiệm}
+Để bài toán có nghiệm khả thi và tối ưu, thường yêu cầu \textbf{cân bằng thu-phát}: $\sum_i a_i = \sum_j b_j$. Nếu không cân bằng, có thể bổ sung điểm phát hoặc nhận giả để cân bằng. Khi cân bằng, luôn tồn tại phương án cơ bản tối ưu.
+
+\section{Bảng vận tải và chu trình}
+Bài toán được biểu diễn dưới dạng bảng chi phí $m \times n$. Mỗi phương án cơ bản không suy biến ứng với $m+n-1$ ô chọn (không chứa chu trình). \textbf{Chu trình} là dãy các ô trong bảng nối tiếp theo hàng/cột sao cho ô đầu và ô cuối liền kề. Chu trình được sử dụng để điều chỉnh lưu lượng và kiểm tra cải tiến nghiệm.
